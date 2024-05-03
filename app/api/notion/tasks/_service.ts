@@ -66,7 +66,7 @@ export class BacklogService {
       parentTaskId: parentIssueId ? `${projectKey}-${parentIssueId}` : null,
       tags: BacklogService._extractArrayString(description, REGEX_METAS.TAGS),
     };
-    Logger.log('Task info ========', task);
+    // Logger.log('[Dev] Task info ========', task);
     return task;
   }
 
@@ -167,7 +167,7 @@ export class NotionService {
         : null,
     ]);
 
-    Logger.log('Task page ========', taskPage, parentTaskPage, project);
+    // Logger.log('[Dev] Task page ========', taskPage, parentTaskPage, project);
 
     const notionProps = this.taskToNotionProperties(task, {
       parentNotionPage: parentTaskPage,
@@ -320,7 +320,6 @@ export class NotionService {
           },
         },
       });
-      Logger.log('[Dev Log] -> NotionService -> getNotionPageFromTaskId -> notionPages:', notionPages)
 
       if (notionPages.results.length < 1) {
         return null;
