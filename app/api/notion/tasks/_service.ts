@@ -167,6 +167,8 @@ export class NotionService {
         : null,
     ]);
 
+    Logger.log('Task page ========', taskPage, parentTaskPage, project);
+
     const notionProps = this.taskToNotionProperties(task, {
       parentNotionPage: parentTaskPage,
       projectPage: project,
@@ -318,6 +320,7 @@ export class NotionService {
           },
         },
       });
+      Logger.log('[Dev Log] -> NotionService -> getNotionPageFromTaskId -> notionPages:', notionPages)
 
       if (notionPages.results.length < 1) {
         return null;
