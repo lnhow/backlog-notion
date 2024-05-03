@@ -40,17 +40,19 @@ export type BacklogWebhook = {
 export type Task = {
   id: string,
   name: string,
+  summary: string,
   priority: string,
   status: TaskStatus,
   project: string | null,
   assignees: string[] | null,
   tags: string[] | null,
-  devDueDate: { start: string | null, due: string | null } | null,
-  releaseDueDate: { start: string | null, due: string | null } | null,
+  devDueDate: { start: string, end: string | null } | null,
+  releaseDueDate: { start: string, end: string | null } | null,
   parentTaskId: string | null,
 }
 
 export const GVN_CATEGORY = "GGJVN"
+export const BACKLOG_URL = process.env.BACKLOG_URL
 
 export enum TaskStatus {
   NOT_STARTED = "Not Started",
@@ -73,3 +75,18 @@ export const TaskStatusMapping: Record<string, TaskStatus> = {
   'reviewing': TaskStatus.REVIEWING,
   'done': TaskStatus.DONE,
 }
+
+export const REGEX_METAS = {
+  PROJECT: /!Project: (.*)/i,
+  ASSIGNEE: /!Assignee: (.*)/i,
+  STATUS: /!Status: (.*)/i,
+  TAGS: /!Tag: (.*)/i,
+  DEV_DUE_DATE: /!Dev: (.*)/i,
+  SUMMARY: /!Summary: (.*)/i,
+}
+
+export const toISOStringWithoutTime = (date: number) => {
+  const isoString = new Date(date).toISOString()
+  return isoString.split('T')[0]
+}
+
