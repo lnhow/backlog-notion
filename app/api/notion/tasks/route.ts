@@ -1,4 +1,4 @@
-import { BacklogService, NotionService } from "./_service";
+import { BacklogService, Logger, NotionService } from "./_service";
 
 export const dynamic = "force-dynamic";
 
@@ -6,6 +6,7 @@ const notionService = new NotionService()
 
 export async function POST(req: Request) {
   const reqBody = await req.json()
+  Logger.log(reqBody.content)
   try {
     const isNotSkipWebhook = BacklogService.validate(reqBody)
     if (!isNotSkipWebhook) {

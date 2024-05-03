@@ -66,6 +66,7 @@ export class BacklogService {
       parentTaskId: parentIssueId ? `${projectKey}-${parentIssueId}` : null,
       tags: BacklogService._extractArrayString(description, REGEX_METAS.TAGS),
     };
+    Logger.log('Task info ========', task);
     return task;
   }
 
