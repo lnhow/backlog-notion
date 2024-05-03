@@ -14,7 +14,7 @@ export async function POST(req: Request) {
     }
     const taskInfo = BacklogService.extractTaskInfo(reqBody)
     
-    notionService.syncTask(taskInfo) 
+    await notionService.syncTask(taskInfo)
   }
   catch (e) {
     return Response.json({ message: 'Bad Request' }, { status: 400 })
